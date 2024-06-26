@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="AmsNetAddress" Id="{684a9b33-942f-0c0e-0db6-13d2d14eb7ef}">
+    <Declaration><![CDATA[TYPE AmsNetAddress : STRUCT
+    netId : Tc2_System.T_AmsNetID;
+    port : T_AmsPort;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

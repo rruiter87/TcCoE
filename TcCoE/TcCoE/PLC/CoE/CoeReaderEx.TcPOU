@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="CoeReaderEx" Id="{cb11d66a-6172-04ac-0ce8-e9577bac676c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK CoeReaderEx EXTENDS FB_EcCoESdoReadEx
+VAR_OUTPUT
+    eAdsError : TcError.AdsErrorCodes;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();
+eAdsError := TcError.ToAdsErrorCode(SUPER^.nErrId);
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

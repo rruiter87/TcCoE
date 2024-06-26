@@ -5,7 +5,7 @@
     <ProjectGuid>{f0bab1e7-b207-4d97-b1f2-fe3d9803120c}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
-    <WriteProductVersion>true</WriteProductVersion>
+    <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>PLC</Name>
     <ProgramVersion>3.1.4023.0</ProgramVersion>
@@ -17,22 +17,37 @@
     <LibraryReferences>{08cfa5ec-be79-4a04-ada0-80de2c70a767}</LibraryReferences>
     <Released>false</Released>
     <CombineIds>true</CombineIds>
+    <Company>Roald</Company>
+    <Title>TcCoE</Title>
+    <ProjectVersion>0.1.0</ProjectVersion>
+    <Description>This library wraps `Tc2_EtherCAT.FB_EcCoESdoWriteEx` and `Tc2_EtherCAT.FB_EcCoESdoReadEx`, to have better error messages using the [TcError](https://github.com/Roald87/TcError/) library.</Description>
+    <Author>Roald</Author>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CoE\AmsNetAddress.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CoE\CoeReaderEx.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CoE\CoeWriterEx.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CoE\ProcessDataObjectIndex.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DUTs" />
-    <Folder Include="GVLs" />
-    <Folder Include="VISUs" />
-    <Folder Include="POUs" />
+    <Folder Include="CoE" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Tc2_EtherCAT">
+      <DefaultResolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_EtherCAT</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>
@@ -45,16 +60,38 @@
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="TcError">
+      <DefaultResolution>TcError, * (Roald)</DefaultResolution>
+      <Namespace>TcError</Namespace>
+    </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderResolution Include="SysDir">
+      <Resolution>SysDir, 3.5.12.0 (System)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="SysFile">
+      <Resolution>SysFile, 3.5.9.0 (System)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc2_EtherCAT">
+      <Resolution>Tc2_EtherCAT, 3.4.4.0 (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_Standard">
       <Resolution>Tc2_Standard, 3.4.5.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_System">
       <Resolution>Tc2_System, 3.6.4.0 (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc2_Utilities">
+      <Resolution>Tc2_Utilities, 3.6.1.0 (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
     <PlaceholderResolution Include="Tc3_Module">
       <Resolution>Tc3_Module, 3.4.5.0 (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="TcError">
+      <Resolution>TcError, 0.2.1 (Roald)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="TcUnit">
+      <Resolution>TcUnit, 1.3.0.0 (www.tcunit.org)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="CoeWriterEx" Id="{37ee684e-8d09-03a3-3880-251c50c0bd87}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK CoeWriterEx
+VAR_INPUT
+    index : ProcessDataObjectIndex; (* CANopen Sdo index.*)
+    pSrcBuf : PVOID; (* Contains the address of the buffer containing the data to be send. *)
+    cbBufLen : UDINT; (* Contains the max. number of bytes to be received. *)
+    bExecute : BOOL; (* Function block execution is triggered by a rising edge at this input.*)
+    tTimeout : TIME := DEFAULT_ADS_TIMEOUT; (* States the time before the function is cancelled. *)
+    bCompleteAccess : BOOL; (* access complete object*)
+END_VAR
+VAR_OUTPUT
+    bBusy : BOOL;
+    bError : BOOL;
+    eAdsError : TcError.AdsErrorCodes;
+END_VAR
+VAR
+    writer : Tc2_EtherCAT.FB_EcCoESdoWriteEx;
+    _amsNetAddress : AmsNetAddress; (* AmsNetId of the EtherCAT master device.*)
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[writer(
+    sNetId:=_amsNetAddress.netId,
+    nSlaveAddr:=_amsNetAddress.port,
+    nIndex:=index.index,
+    nSubIndex:=index.subIndex,
+    pSrcBuf:=pSrcBuf,
+    cbBufLen:=cbBufLen,
+    bExecute:=bExecute,
+    tTimeout:=tTimeOut,
+    bCompleteAccess:=bCompleteAccess,
+    bBusy=>bBusy,
+    bError=>bError,
+);
+eAdsError := TcError.ToAdsErrorCode(writer.nErrId);
+]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{51d0f3b4-43e0-019d-09d6-8dbd8fe67963}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode :
+        BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    amsNetAddress : AmsNetAddress;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^._amsNetAddress := amsNetAddress;
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

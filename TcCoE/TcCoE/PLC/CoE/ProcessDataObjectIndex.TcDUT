@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ProcessDataObjectIndex" Id="{72581df7-23a1-0c07-10c2-55288759defe}">
+    <Declaration><![CDATA[TYPE ProcessDataObjectIndex : STRUCT
+    index : WORD;
+    subIndex : BYTE;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
