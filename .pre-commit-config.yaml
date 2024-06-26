@@ -10,7 +10,7 @@ repos:
       - id: no-product-version
       - id: minimize-id-changes
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0  # Use the ref you want to point at
+    rev: v4.5.0 # Use the ref you want to point at
     hooks:
       # Removes trailing white spaces
       - id: trailing-whitespace
@@ -28,37 +28,16 @@ repos:
     hooks:
       - id: stweep
         name: Format TwinCAT files with STweep
-        entry: python stweep_format.py
+        entry: python stweep_format.py --settingsFile=settings.STweep
         language: python
         # All files need to be passed at once, or else the license activation/deactivation fails
         require_serial: true
         files: '.*\.(TcPOU|TcDUT|TcTTO|TcGVL)'
-  - repo: local
-    hooks:
-      - id: CSharpier
-        name: Format C# files
-        entry: dotnet csharpier
-        language: system
-        files: '.*\.(cs$)'
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    # Ruff version.
-    rev: v0.3.5
-    hooks:
-      # Run the linter.
-      - id: ruff
-        # --select I sorts imports 
-        args: [ --fix, --select, I  ]
-      # Run the formatter.
-      - id: ruff-format
-  - repo: https://gitlab.com/rruiter87/pre-commit-hooks
-    rev: v1.3.0
-    hooks:
-      - id: check-poetry
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v2.7.1
     hooks:
       - id: prettier
-        exclude_types: ["markdown", "svg"]
+        exclude_types: ["svg"]
         additional_dependencies:
           - prettier@2.6.2
           - "@prettier/plugin-xml@0.12.0"
@@ -70,4 +49,3 @@ repos:
         args: [--fix]
         # Ajust this to how you name your unit tests
         files: '.*_Tests\.TcPOU'
-        
